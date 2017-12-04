@@ -1,4 +1,8 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Authorization');
+header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS');
+header('Access-Control-Expose-Headers: X-Total-Pages');
 
 /*
 |--------------------------------------------------------------------------
@@ -13,4 +17,10 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::group(['prefix' => 'api'], function() {
+    Route::group(['prefix' => 'auth'], function() {
+        Route::post('login', 'API\UsersController@login');
+    });
 });
